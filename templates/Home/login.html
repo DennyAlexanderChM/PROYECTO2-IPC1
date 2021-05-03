@@ -1,0 +1,35 @@
+<!--Herredamos de layaut-->
+{% extends "layout.html" %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="text-center col-12">
+                        <h2>INICIO DE SESIÓN</h2>
+                    </div>
+                    <div class="text-center col-12">
+                        <form class="text-center" action="/login" method="POST">
+                            <div class="form-group">
+                                <label for="name">Usuario</label>
+                                <input type="text" class="form-control" name="user" placeholder="Ingrese su usuario" aria-describedby="nameHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contraseña</label>
+                                <input type="password" name="pass" class="form-control" id="exampleInputPassword1" placeholder="Ingrese su contraseña" required>
+                            </div>
+                            <button type="submit" name='btn2' class=" btn btn-primary btn-lg btn-block">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/check" class="btn btn-link" role="button" aria-pressed="true">¿Aún no tienes una cuenta?</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% if error %}
+<script>
+    Swal.fire('Usuario o contraseña incorectas')
+</script>{% endif %} {% endblock %}

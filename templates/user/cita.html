@@ -1,0 +1,39 @@
+<!--Herredamos de layout-->
+{% extends "user/layout.html" %} {% block content %}
+<div class="container p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="jumbotron">
+                    <div class="row text-center">
+                        <div class="text-center col-12">
+                            <h2>Citas medicas</h2><br>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nueva cita</h5>
+                                    <p class="card-text"></p>
+                                    <a href="/cita/nueva/{{ usuario }}" class="btn btn-primary">Ir a cita</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Estado de citas</h5>
+                                    <p class="card-text"></p>
+                                    <a href="/lista/citas/{{ usuario }}" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="/user/home/{{ usuario }}" type="button" class="btn btn-success  btn-lg">Regresar</a>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

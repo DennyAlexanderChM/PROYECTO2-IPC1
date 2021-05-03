@@ -1,0 +1,24 @@
+<!--Herredamos de layaut-->
+{% extends "layout.html" %} {% block content %}
+<div class="text-center">
+    <h4 class="display-4">Datos del estudiante</h4>
+</div>
+<div class="row margin_top_30">
+    <div class="col-md-4">
+        <img src="{{ url_for('static', filename='images/logo.png')}}" class="img-fluid" alt="...">
+    </div>
+    <div class="col-md-6">
+        <h5>Nombre</h5>
+        <p>Denny Alexander Chalí Miza</p>
+        <br>
+        <h5>Carné</h5>
+        <p>201807154</p>
+        <br>
+        <h5>Teléfono</h5>
+        <p><img src="{{ url_for('static', filename='images/icon-phone.PNG')}}" class="img-fluid" alt="..."> +502 5171-0204</p>
+        <br>
+        <h5>Correo</h5>
+        <p><img src="{{ url_for('static', filename='images/icon-correo.PNG')}}" class="img-fluid" alt="..."> 2838484560404@ingenieria.usac.edu.gt</p>
+    </div>
+</div>
+{% endblock %}

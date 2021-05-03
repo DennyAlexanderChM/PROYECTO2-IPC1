@@ -1,1 +1,1 @@
-# PROYECTO2-IPC1
+# Proyecto2

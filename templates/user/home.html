@@ -1,0 +1,67 @@
+<!--Herredamos de layout-->
+{% extends "user/layout.html" %} {% block content %}
+<div class="card bg-dark text-white">
+    <img src="{{ url_for('static', filename='images/4.jpg')}}" class=" card-img " alt="... ">
+    <div class="card-img-overlay ">
+        <div class="text-center">
+            <h1 class="card-title ">Bienvenido a UHospital {{ nombre }}</h1><br>
+            <h3 class="card-text">¡Será un gusto atenderlo!</h3><br>
+            <h3 class="card-text">A su servicio las 24 horas del día.</h3>
+        </div>
+    </div>
+</div>
+<div class="container p-3">
+    <div class="container">
+        <div class="text-lg-center">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h4 class="display-4">¡Siempre a su lado!</h4><br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="card border-info mb-3" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5>Agendar una cita medica</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Puedes agendar una cita en el horario que desees, solo debes de esperar la
+                            confimación.</p>
+                        <div class="text-center">
+                            <a href="/cita/{{ usuario }}" class="btn btn-primary">Ir a cita</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card border-info mb-3" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5>Tienda online</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Compra tus medicamentos con nosotros, aquí encontrarás todo lo necesario.
+                        </p>
+                        <div class="text-center">
+                            <a href="/user/tienda/{{ usuario }}" class="btn btn-primary">Ir a tienda</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card border-info mb-3" style=" width: 18rem;">
+                    <div class="card-header">
+                        <h5>Editar perfil</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Visualiza y edita los datos de tu cuenta.</p><br>
+                        <div class="text-center">
+                            <a href="/user/perfil/{{ usuario }}" class="btn btn-primary">Ir a perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

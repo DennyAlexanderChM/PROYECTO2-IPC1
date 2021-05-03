@@ -1,0 +1,54 @@
+{% extends "Enfermeras/layout.html" %} {% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-12 mx-auto">
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="text-center col-12">
+                        <h3>Confirmar cita</h3><br>
+                    </div>
+                    <div class="text-center col-12">
+                        <form class="text-lg-right" action="/enfermera/cita/confirmar/{{ usuario }}/{{ usuario2 }}"
+                            method="POST">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" WIDTH="160">Paciente</th>
+                                        <th scope="col" WIDTH="150">Fecha</th>
+                                        <th scope="col" WIDTH="100">Hora</th>
+                                        <th scope="col" WIDTH="300">Motivo</th>
+                                        <th scope="col">Medico</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {% for i in cita %}
+                                        <td>{{ i.0 }} {{ i.1 }}</td>
+                                        <td>{{ i.3 }}</td>
+                                        <td>{{ i.4 }}</td>
+                                        <td>{{ i.5 }}</td>
+                                        {% endfor %}
+                                        <td>
+                                            <select name="medico" class="custom-select" id="exampleFormControlSelect1">
+                                                {% for i in medicos %}
+                                                <option value="{{ i.2 }}">{{ i.0 }} {{ i.1 }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-center"><button type="submit" name='btn2'
+                                    class=" btn btn-primary btn-lg">Confirmar</button> <a
+                                    href="/enfermera/cita/pendientes/{{ usuario }}" type="button"
+                                    class="btn btn-success  btn-lg">Cancelar</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

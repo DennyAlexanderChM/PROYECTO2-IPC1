@@ -1,0 +1,92 @@
+{% extends "layout.html" %} {% block content %}
+<div class="row margin_top_30">
+    <div class="heading">
+        <h4 class="display-4">Alerta sobre COVID-19</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="full blog_cont">
+                <u><h4>¿Qué es la COVID-19?</h4></u>
+                <p>La COVID-19 es la enfermedad causada por el nuevo coronavirus conocido como SARS-CoV-2. La OMS tuvo noticia por primera vez de la existencia de este nuevo virus el 31 de diciembre de 2019, al ser informada de un grupo de casos de «neumonía
+                    vírica» que se habían declarado en Wuhan (República Popular China).</p><br>
+                <u><h4>¿Cuáles son los síntomas de la COVID-19?</h4></u>
+
+                <p>Síntomas menos frecuentes y que pueden afectan a algunos pacientes:</p>
+                <ol type=”A”>
+                    <li>Pérdida del gusto o el olfato</li>
+                    <li>Congestión nasal</li>
+                    <li>Conjuntivitis (enrojecimiento ocular)</li>
+                    <li>Dolor de garganta</li>
+                    <li>Dolor de cabeza</li>
+                    <li>Dolores musculares o articulares </li>
+                    <li>Diferentes tipos de erupciones cutáneas</li>
+                    <li>Náuseas o vómitos</li>
+                    <li>Diarrea</li>
+                    <li>Escalofríos o vértigo</li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <img src="{{ url_for('static', filename='images/covid.jpg')}}" class="img-fluid" alt="...">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="full blog_cont">
+                <p>Los síntomas más habituados de la COVID-19 son:</p>
+                <ol type=”A”>
+                    <li>Fiebre</li>
+                    <li>Tos seca</li>
+                    <li>Cansansio</li>
+                </ol>
+                <p>Entre los síntomas de un cuadro grave de la COVID-19 se incluyen:</p>
+                <ol type=”A”>
+                    <li>Disnea (dificultad respiratoria)</li>
+                    <li>Pérdida de apetito</li>
+                    <li>Confusión</li>
+                    <li>Dolor u opresión persistente en el pecho</li>
+                    <li>Temperatura alta (por encima de los 38° C)</li>
+                </ol>
+                <p>Las personas de cualquier edad que tengan fiebre o tos y además respiren con dificultad, sientan dolor u opresión en el pecho o tengan dificultades para hablar o moverse deben solicitar atención médica inmediatamente. De ser posible, llame
+                    con antelación a su dispensador de atención de salud, al teléfono de asistencia o al centro de salud para que puedan indicarle el dispensario adecuado.</p>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <img src="{{ url_for('static', filename='images/sintomas.png')}}" class="img-fluid" alt="...">
+        </div>
+    </div>
+</div>
+<hr size="8px" color="blue" />
+<div class="row margin_top_30">
+
+    <div class="row">
+        <div class="col-md-5">
+            <img src="{{ url_for('static', filename='images/prevencion.png')}}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-md-6">
+            <div class="full blog_cont">
+                <u><h4>Medidas de prevención del COVID-19</h4></u>
+                <p>Para evitar la propagación de la COVID-19:</p>
+                <ol type=”A”>
+                    <li>Lávate las manos con frecuencia. Usa agua y jabón o un desinfectante de manos a base de alcohol.</li>
+                    <li>Mantén una distancia de seguridad con personas que tosan o estornuden.</li>
+                    <li>Utiliza mascarilla cuando no sea posible mantener el distanciamiento físico.</li>
+                    <li>No te toques los ojos, la nariz ni la boca.</li>
+                    <li>Cuando tosas o estornudes, cúbrete la nariz y la boca con el codo flexionado o con un pañuelo.</li>
+                    <li>Si no te encuentras bien, quédate en casa.</li>
+                    <li>En caso de que tengas fiebre, tos o dificultad para respirar, busca atención médica.</li>
+                </ol>
+                <p>Llama por teléfono antes de acudir a cualquier proveedor de servicios sanitarios para que te dirijan al centro médico adecuado. De esta forma, te protegerás a ti y evitarás la propagación de virus y otras infecciones.</p>
+                <p>Mascarillas</p>
+                <p>Las mascarillas pueden ayudar a prevenir que las personas que las llevan propaguen el virus y lo contagien a otras personas. Sin embargo, no protegen frente a la COVID-19 por sí solas, sino que deben combinarse con el distanciamiento físico
+                    y la higiene de manos.</p><br>
+                <div class="text-center">
+                    <h3>Continuamos trabajando arduamente para protegerte y cuando nos necesites estaremos aquí para ayudarte y servirte de manera segura y confiable.</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "user/layout.html" %} {% block content %}
+<div class="container p-5">
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+            <div class="jumbotron">
+                <div class="row text-center">
+                    <div class="text-center col-12">
+                        <h3>Nueva cita medica</h3><br>
+                    </div>
+                    <div class="text-center col-12">
+                        <form class="text-lg-right" action="/cita/nueva/{{ usuario }}" method="POST">
+                            <div class="form-group row">
+                                <label for="fecha"  class="col-sm-1 col-form-label">Fecha</label>
+                                <div class="col-sm-5">
+                                    <input type="date" min="2021-04-01" name="fecha" class="form-control" required>
+                                </div>
+                                <label for="hora" class="col-sm-1 col-form-label">Hora</label>
+                                <div class="col-sm-5">
+                                    <input type="time" name="hora" min="08:00" max="18:00" required class="form-control" required>
+                                </div>
+                            </div><br>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Motivo de la cita</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="motivo" rows="3" required> </textarea>
+                                </div>
+                            </div><br>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-warning  btn-lg">Solicitar</button> 
+                                <a href="/cita/{{ usuario }}" type="button" class="btn btn-success  btn-lg">Regresar</a>
+                           </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+<script>
+    Swal.fire(
+        '{{ message }}',
+        '¡Espera a que tu cita sea confirmada!',
+        'success'
+    )
+</script>
+{% endfor %} {% endif %} {% endwith %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "Enfermeras/layout.html" %} {% block content %}
+<br>
+<div class="col-12 col-md-10 mx-auto">
+    <div class="jumbotron">
+        <h4 class="text-center">Lista de citas pendientes</h4><br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" WIDTH="40">No.</th>
+                    <th scope="col" WIDTH="160">Paciente</th>
+                    <th scope="col" WIDTH="150">Fecha</th>
+                    <th scope="col" WIDTH="100">Hora</th>
+                    <th scope="col" WIDTH="300">Motivo</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in citas %}
+                <tr>
+                    <th scope="row">{{ i.0 }}</th>
+                    <td>{{ i.1 }} {{ i.2 }}</td>
+                    <td>{{ i.4 }}</td>
+                    <td>{{ i.5 }}</td>
+                    <td>{{ i.6 }}</td>
+                    <td> <a href="/enfermera/cita/confirmar/{{ usuario }}/{{ i.3 }}" type="button" class="btn btn-primary">Confirmar</a>
+                <a href="/enfermera/cita/rechazar/{{ usuario }}/{{ i.3 }}" type="button" class="btn btn-danger">Rechazar</a>
+            </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="text-center">
+        <a href="/enfermeras/citas/{{ usuario }}" type="button" class="btn btn-success  btn-lg">Regresar</a>
+    </div>
+</div>
+<hr class="my-5">
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+<script>
+    Swal.fire(
+        '{{ message }}',
+        '¡Cita confirmada!',
+        'success'
+    )
+</script>
+{% endfor %} {% endif %} {% endwith %}
+{% endblock %}

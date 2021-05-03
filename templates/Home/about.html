@@ -1,0 +1,80 @@
+{% extends "layout.html" %} {% block content %}
+<h2 class="display-3"><b>¿Quiénes somos?</b></h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{ url_for('static', filename='images/cabezera.jpg')}}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-md-4">
+            <div class="full slider_cont_section">
+                <p class="text-primary">Somos una institución de reconocido prestigio, operada por la Asociación de Médicos Especialistas de Guatemala, una organización no lucrativa cuya meta ha sido brindar lo mejor de la medicina moderna a la población de Guatemala y a las
+                    personas extranjeras que nos visiten.</p>
+                <div class="button_section">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr size="8px" color="blue" />
+<div class="row margin_top_30">
+    <h4>UHospital</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="full blog_cont">
+                <p>Ha sido pionero en Guatemala en la aplicación de los más destacados avances científicos y tecnológicos. En la actualidad, continúa desarrollando las actividades necesarias que le permitan mantenerse al día y alcanzar la máxima eficiencia,
+                    para mejor satisfacer las necesidades de los pacientes, usando los medios más modernos y eficaces.</p>
+                <p>Sus profesionales practican la medicina en instalaciones diseñadas específicamente para ese fin, e inspirados por un alto ideal de servicio a la comunidad.</p>
+                Como consecuencia, el Hospital <b>UHospital</b> es poseedor de un gran prestigio. Ese prestigio ha sido reconocido a través de casi cinco décadas de servicio, por generaciones de pacientes, sus familiares y amigos y ha trascendido más
+                allá de nuestras fronteras.</p><br>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='images/somos.jpg')}}" class="img-fluid" alt="...">
+        </div>
+    </div>
+    <p>El Hospital <b>UHospital</b> ha sido elegido como lugar de tratamiento de personalidades a nivel mundial para ser internados en caso de alguna eventual emergencia mientras visitan Guatemala. Entre otros, destacan Miembros de Misiones Internacionales,
+        el Sumo Pontífice, Su Santidad Juan Pablo II y Jefes de Estado de varias naciones, tales como el ex presidente de los Estados Unidos William Bill Clinton y Presidentes de países amigos como México y Francia.</p>
+</div>
+<hr size="8px" color="blue" />
+<h4>Nuestros servicios</h4>
+<div class="row margin_top_30">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cirugía</li>
+                    <li class="list-group-item">Medicina Interna</li>
+                    <li class="list-group-item">Anestesiología</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Gineco-Obstetricia</li>
+                    <li class="list-group-item">Pediatría</li>
+                    <li class="list-group-item">Ortopedia y Traumatología</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Urología</li>
+                    <li class="list-group-item">Gastroenterología</li>
+                    <li class="list-group-item">Otorrinolaringología</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Patología</li>
+                    <li class="list-group-item">Radiología</li>
+                    <li class="list-group-item">Oftalmología</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

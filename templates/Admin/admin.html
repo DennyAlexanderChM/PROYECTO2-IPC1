@@ -1,0 +1,303 @@
+<!--Herredamos de layaut-->
+{% extends "Admin/layout.html" %} {% block content %}
+<div class="container p-3">
+    <div class="container">
+        <div class="col-12 col-md-9 mx-auto">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pacientes-tab" data-bs-toggle="tab" data-bs-target="#pacientes" type="button" role="tab" aria-controls="pacientes" aria-selected="true">Pacientes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="enfermeras-tab" data-bs-toggle="tab" data-bs-target="#enfermeras" type="button" role="tab" aria-controls="enfermeras" aria-selected="false">Enfermeras</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="medicos-tab" data-bs-toggle="tab" data-bs-target="#medicos" type="button" role="tab" aria-controls="medicos" aria-selected="false">Médicos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="medicamentos-tab" data-bs-toggle="tab" data-bs-target="#medicamentos" type="button" role="tab" aria-controls="medicamentos" aria-selected="false">Medicamentos</button>
+                </li>
+            </ul>
+            <!--INGRESO CSV DE PACIENTES-->
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pacientes" role="tabpanel" aria-labelledby="pacientes-tab">
+                    <div class="jumbotron">
+                        <h3 class="text-center">Carga masiva</h3><br>
+                        <form name="form1" class="text-lg-center" id="form1">
+                            <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv" required>
+                            <small id="fileHelp" class="form-text text-muted">Seleccione el archivo CSV que
+                            contiene
+                            los datos de los pacientes.</small>
+                        </form>
+
+                    </div>
+                </div>
+                <!--INGRESO CSV DE ENFERMERAS-->
+                <div class="tab-pane fade" id="enfermeras" role="tabpanel" aria-labelledby="enfermeras-tab">
+                    <div class="jumbotron">
+                        <h3 class="text-center">Carga masiva</h3><br>
+                        <form name="form2" class="text-lg-center" id="form2">
+                            <input type="file" id="csvFileInput" onchange="handleFiles2(this.files)" accept=".csv" required>
+                            <small id="fileHelp" class="form-text text-muted">Seleccione el archivo CSV que
+                            contiene
+                            los datos de las enfermeras.</small>
+                        </form>
+                    </div>
+                </div>
+                <!--INGRESO CSV DE MEDICOS-->
+                <div class="tab-pane fade" id="medicos" role="tabpanel" aria-labelledby="medicos-tab">
+                    <div class="jumbotron">
+                        <h3 class="text-center">Carga masiva</h3><br>
+                        <form name="form3" class="text-lg-center" id="form3">
+                            <input type="file" id="csvFileInput" onchange="handleFiles3(this.files)" accept=".csv" required>
+                            <small id="fileHelp" class="form-text text-muted">Seleccione el archivo CSV que
+                            contiene
+                            los datos de los medicos.</small>
+                        </form>
+                    </div>
+                </div>
+                <!--INGRESO CSV DE MEDICAMENTOS-->
+                <div class="tab-pane fade" id="medicamentos" role="tabpanel" aria-labelledby="medicamentos-tab">
+                    <div class="jumbotron">
+                        <h3 class="text-center">Carga masiva</h3><br>
+                        <form name="form4" class="text-lg-center" id="form4">
+                            <input type="file" id="csvFileInput" onchange="handleFiles4(this.files)" accept=".csv" required>
+                            <small id="fileHelp" class="form-text text-muted">Seleccione el archivo CSV que
+                            contiene
+                            los datos de los medicamentos disponibles.</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //lectura de archivos ---> Pacientes
+    function handleFiles(files) {
+        //Verificamos si es posible que el sistema lea el archivo
+        if (window.FileReader) {
+            getAsText(files[0]);
+        } else {
+            alert('FileReader are not supported in this browser.');
+        }
+    }
+
+    function getAsText(fileToRead) {
+        var reader = new FileReader();
+        reader.readAsText(fileToRead);
+        reader.onload = loadHandler;
+        reader.onerror = errorHandler;
+    }
+
+    function loadHandler(event) {
+        var csv = event.target.result;
+        csvJSON(csv);
+    }
+    //-------------------------------------------------
+    function csvJSON(csv) {
+        var lines = csv.split("\n");
+        var result = [];
+        var headers = lines[0].split(",");
+        headers[4] = 'Usuario';
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentline = lines[i].split(",");
+            for (var j = 0; j < headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+            }
+            fetch('http://127.0.0.1:5000/usuario', {
+                method: 'POST',
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
+
+            .then(res => res.json())
+                .catch(err => {
+                    console.error('Error:', err)
+                    alert("Ocurrio un error, ver la consola")
+                })
+                .then(response => {
+                    console.log(response);
+                });
+        }
+        Swal.fire('¡Lista cargada correctamente!')
+    }
+
+
+    //-------------------------------------------------------------------------
+    //lectura de archivos ---> enfermeras
+    function handleFiles2(files) {
+        //Verificamos si es posible que el sistema lea el archivo
+        if (window.FileReader) {
+            getAsText2(files[0]);
+        } else {
+            alert('FileReader are not supported in this browser.');
+        }
+    }
+
+    function getAsText2(fileToRead) {
+        var reader = new FileReader();
+        reader.readAsText(fileToRead);
+        reader.onload = loadHandler2;
+        reader.onerror = errorHandler;
+    }
+
+    function loadHandler2(event) {
+        var csv = event.target.result;
+        csvJSON2(csv);
+    }
+
+    function csvJSON2(csv) {
+        var lines = csv.split("\n");
+        var result = [];
+        var headers = lines[0].split(",");
+        headers[4] = 'Usuario';
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentline = lines[i].split(",");
+            for (var j = 0; j < headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+            }
+            fetch('http://127.0.0.1:5000/enfermeras', {
+                method: 'POST',
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
+
+            .then(res => res.json())
+                .catch(err => {
+                    console.error('Error:', err)
+                    alert("Ocurrio un error, ver la consola")
+                })
+                .then(response => {
+                    console.log(response);
+                });
+        }
+        Swal.fire('¡Lista Cargada correctamente!')
+    }
+
+    //-------------------------------------------------------------------------
+    //lectura de archivos ---> medicos
+    function handleFiles3(files) {
+        //Verificamos si es posible que el sistema lea el archivo
+        if (window.FileReader) {
+            getAsText3(files[0]);
+        } else {
+            alert('FileReader are not supported in this browser.');
+        }
+    }
+
+    function getAsText3(fileToRead) {
+        var reader = new FileReader();
+        reader.readAsText(fileToRead);
+        reader.onload = loadHandler3;
+        reader.onerror = errorHandler;
+    }
+
+    function loadHandler3(event) {
+        var csv = event.target.result;
+        var json = csvJSON3(csv);
+        console.log(json);
+    }
+
+    function csvJSON3(csv) {
+        var lines = csv.split("\n");
+        var result = [];
+        var headers = lines[0].split(",");
+        headers[4] = 'Usuario';
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentline = lines[i].split(",");
+            for (var j = 0; j < headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+            }
+            fetch('http://127.0.0.1:5000/medicos', {
+                method: 'POST',
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
+
+            .then(res => res.json())
+                .catch(err => {
+                    console.error('Error:', err)
+                    alert("Ocurrio un error, ver la consola")
+                })
+                .then(response => {
+                    console.log(response);
+                });
+        }
+        Swal.fire('¡Lista cargada correctamente!')
+    }
+
+    //-------------------------------------------------------------------------
+    //lectura de archivos ---> medicamentos
+    function handleFiles4(files) {
+        //Verificamos si es posible que el sistema lea el archivo
+        if (window.FileReader) {
+            getAsText4(files[0]);
+        } else {
+            alert('FileReader are not supported in this browser.');
+        }
+    }
+
+    function getAsText4(fileToRead) {
+        var reader = new FileReader();
+        reader.readAsText(fileToRead);
+        reader.onload = loadHandler4;
+        reader.onerror = errorHandler;
+    }
+
+    function loadHandler4(event) {
+        var csv = event.target.result;
+        var json = csvJSON4(csv);
+        console.log(json);
+    }
+
+    function csvJSON4(csv) {
+        var lines = csv.split("\n");
+        var result = [];
+        var headers = lines[0].split(",");
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentline = lines[i].split(",");
+            for (var j = 0; j < headers.length; j++) {
+                obj[headers[j]] = currentline[j];
+            }
+            fetch('http://127.0.0.1:5000/medicamentos', {
+                method: 'POST',
+                body: JSON.stringify(obj),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
+
+            .then(res => res.json())
+                .catch(err => {
+                    console.error('Error:', err)
+                    alert("Ocurrio un error, ver la consola")
+                })
+                .then(response => {
+                    console.log(response);
+                });
+        }
+        Swal.fire('¡Lista cargada correctamente!')
+    }
+
+    function errorHandler(evt) {
+        if (evt.target.error.name == "NotReadableError") {
+            alert("Canno't read file !");
+        }
+    }
+</script>
+{% endblock %}

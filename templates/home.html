@@ -1,0 +1,89 @@
+<!--Herredamos de layaut-->
+{% extends "layout.html" %} {% block content %}
+<div class="text-center">
+<img src="{{ url_for('static', filename='images/logo2.png')}}" class="img-fluid" alt="...">
+</div>
+<hr size="15px" color="blue" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{ url_for('static', filename='images/cabezera.jpg')}}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-md-4">
+            <div class="full slider_cont_section">
+                <u><h3>¿Quiénes somos?</h3></u>
+                <p class="text-primary">Somos una institución de reconocido prestigio, operada por la Asociación de Médicos Especialistas de Guatemala, una organización no lucrativa cuya meta ha sido brindar lo mejor de la medicina moderna a la población de Guatemala y a las
+                    personas extranjeras que nos visiten.</p>
+                <div class="button_section">
+                    <a href="/about">Leer más...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="my-4">
+<div class="section layout_padding">
+    <div class="container">
+        <div class="text-lg-center">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h4 class="display-4">Misión/Visión</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename='images/1.jpg')}}" class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-6">
+                <div class="full blog_cont">
+                    <u><h4>Nuestra Misión</h4></u>
+                    <p>Somos una Institución de salud que provee servicios integrales, innovadores y de excelencia, con énfasis en la seguridad de los pacientes y contribuyendo al desarrollo de la ciencia médica en Guatemala.</p><br>
+                    <u><h4>Nuestra Visión</h4></u>
+                    <p>Nuestra Visión Ser la mejor institución de salud en Guatemala, que proporciona servicios médico-hospitalarios de excelencia, con calor humano y ética profesional.</p>
+                </div>
+            </div>
+        </div>
+        <hr class="my-5">
+        <div class="row margin_top_30">
+            <div class="heading">
+                <h4 class="display-4">Alerta sobre COVID-19</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="full blog_cont">
+                        <u><h4>¿Qué es la COVID-19?</h4></u>
+                        <p>La COVID-19 es la enfermedad causada por el nuevo coronavirus conocido como SARS-CoV-2. La OMS tuvo noticia por primera vez de la existencia de este nuevo virus el 31 de diciembre de 2019, al ser informada de un grupo de casos
+                            de «neumonía vírica» que se habían declarado en Wuhan (República Popular China).</p><br>
+                        <u><h4>¿Cuáles son los síntomas de la COVID-19?</h4></u>
+                        <p>Los síntomas más habituados de la COVID-19 son:</p>
+                        <ol type=”A”>
+                            <li>Fiebre</li>
+                            <li>Tos seca</li>
+                            <li>Cansansio</li>
+                        </ol>
+                        <p>Otros síntomas menos frecuentes... <a href="/covid">Leer más</a></p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ url_for('static', filename='images/covid.jpg')}}" class="img-fluid" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--BOTONES FLOTANTES-->
+<!--div class="sticky-container">
+    <ul class="sticky">
+        <li>
+            <img src="{{ url_for('static', filename='images/estudiante.png')}}" width="32" height="32">
+            <p><a href="https://www.facebook.com/programacionnet" target="_blank">Like Us on<br>Facebook</a></p>
+        </li>
+        <li>
+            <img src="images/twitter-circle.png" width="32" height="32">
+            <p><a href="https://twitter.com/noprog" target="_blank">Follow Us on<br>Twitter</a></p>
+        </li>
+    </ul>
+</div-->
+{% endblock %}

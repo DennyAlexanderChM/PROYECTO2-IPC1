@@ -1,0 +1,40 @@
+<!--Herredamos de layout-->
+{% extends "Medicos/layout.html" %} {% block content %}
+<div class="container p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="jumbotron">
+                    <div class="row text-center">
+                        <div class="text-center col-12">
+                            <h2>Citas medicas</h2><br>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Citas asignadas</h5>
+                                    <p class="card-text"></p>
+                                    <a href="/medico/cita/confirmadas/{{ usuario }}" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Citas pendientes</h5>
+                                    <p class="card-text"></p>
+                                    <a href="/medico/cita/pendientes/{{ usuario }}" class="btn btn-primary">Ver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="/medico/home/{{ usuario }}" type="button" class="btn btn-success  btn-lg">Regresar</a>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="my-5">
+{% endblock %}

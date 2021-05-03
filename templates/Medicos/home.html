@@ -1,0 +1,60 @@
+<!--Herredamos de layaut-->
+{% extends "Medicos/layout.html" %} {% block content %}
+<div class="card bg-dark text-white">
+    <img src="{{ url_for('static', filename='images/4.jpg')}}" class=" card-img " alt="... ">
+    <div class="card-img-overlay ">
+        <div class="text-center">
+            <h1 class="card-title ">Bienvenido a UHospital {{ nombre }}</h1><br>
+            <h3 class="card-text">¡Gracias por su excelente labor!</h3><br>
+            <h3 class="card-text">Más que un hospital, somos familia.</h3>
+        </div>
+    </div>
+</div>
+<div class="container p-3">
+    <div class="container">
+        <div class="text-lg-center">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h4 class="display-4">¡Siempre a su lado!</h4><br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="card border-info mb-3" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5>Control de citas</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Citas pendientes y aceptadas</p>
+                        <a href="/medico/citas/{{ usuario }}" class="btn btn-primary">Ir a citas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card border-info mb-3" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5>Generar Factur</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">a</h5>
+                        <p class="card-text">Generar las facturas de las citas y consultas.</p>
+                        <a href="/medico/receta/generar/{{ usuario }}" class="btn btn-primary">Facturar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card border-info mb-3" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5>Editar perfil</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Visualiza y modifica la información de tu cuenta.</p>
+                        <a href="/medico/perfil/{{ usuario }}" class="btn btn-primary">Mi perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

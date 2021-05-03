@@ -1,0 +1,690 @@
+<!--Herredamos de layaut-->
+{% extends "Admin/layout.html" %} {% block content %}
+<div class="container p-3">
+    <div class="container">
+        <div class="col-12 col-md-11 mx-auto">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pacientes-tab" data-bs-toggle="tab" data-bs-target="#pacientes"
+                        type="button" role="tab" aria-controls="pacientes" aria-selected="true">Pacientes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="enfermeras-tab" data-bs-toggle="tab" data-bs-target="#enfermeras"
+                        type="button" role="tab" aria-controls="enfermeras" aria-selected="false">Enfermeras</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="medicos-tab" data-bs-toggle="tab" data-bs-target="#medicos"
+                        type="button" role="tab" aria-controls="medicos" aria-selected="false">Médicos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="medicamentos-tab" data-bs-toggle="tab" data-bs-target="#medicamentos"
+                        type="button" role="tab" aria-controls="medicamentos"
+                        aria-selected="false">Medicamentos</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <!--TABLA DE PACIENTES-->
+                <div class="tab-pane fade show active" id="pacientes" role="tabpanel" aria-labelledby="pacientes-tab">
+                    <div class="jumbotron">
+                        <h4 class="text-center">Lista de pacientes</h4><br>
+                        <div>
+                            <button onclick="pdfPacientes()" class="btn btn-outline-secondary"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                                </svg> Generar PDf</button>
+
+                        </div>
+                        <br>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in users %}
+                                <tr>
+                                    <th scope="row">{{ i.0 }}</th>
+                                    <td>{{ i.1 }}</td>
+                                    <td>{{ i.2 }}</td>
+                                    <td>{{ i.7 }}</td>
+                                    <td>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#{{ i.5 }}"
+                                            type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                <path
+                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                            </svg>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{ i.5 }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Paciente: {{ i.1
+                                                            }} {{ i.2 }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Nombre</th>
+                                                                    <td>{{ i.1 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Apellido</th>
+                                                                    <td>{{ i.2 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Fecha de Nacimiento</th>
+                                                                    <td>{{ i.3 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Sexo</th>
+                                                                    <td>{{ i.4 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Nombre de Usuario</th>
+                                                                    <td>{{ i.5 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Contraseña</th>
+                                                                    <td>{{ i.6 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Número de Teléfono</th>
+                                                                    <td>{{ i.7 }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/edit/user/{{ i.5 }}" type="button" class="btn btn-primary"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg></a>
+
+                                        <a href="/delete/user/{{ i.5 }}" method="POST" type="button"
+                                            class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--TABLA DE ENFERMERAS-->
+                <div class="tab-pane fade" id="enfermeras" role="tabpanel" aria-labelledby="enfermeras-tab">
+                    <div class="jumbotron">
+                        <h4 class="text-center">Lista de enfermeras</h4><br>
+                        <div>
+                            <button onclick="pdfEnfermeras()" class="btn btn-outline-secondary"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                                </svg> Generar PDf</button>
+
+                        </div>
+                        <br>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Télefono</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in enfermeras %}
+                                <tr>
+                                    <th scope="row">{{ i.0 }}</th>
+                                    <td>{{ i.1 }}</td>
+                                    <td>{{ i.2 }}</td>
+                                    <td>{{ i.7 }}</td>
+                                    <td>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#{{ i.5 }}E"
+                                            type="button" class="btn btn-success">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                <path
+                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                            </svg>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{ i.5 }}E" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Paciente: {{ i.1
+                                                            }} {{ i.2 }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Nombre</th>
+                                                                    <td>{{ i.1 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Apellido</th>
+                                                                    <td>{{ i.2 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Fecha de Nacimiento</th>
+                                                                    <td>{{ i.3 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Sexo</th>
+                                                                    <td>{{ i.4 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Nombre de Usuario</th>
+                                                                    <td>{{ i.5 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Contraseña</th>
+                                                                    <td>{{ i.6 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Número de Teléfono</th>
+                                                                    <td>{{ i.7 }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/edit/nurse/{{ i.5 }}" type="button" class="btn btn-primary"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg></a>
+
+                                        <a href="/delete/nurse/{{ i.5 }}" type="button" class="btn btn-danger"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--TABLA DE MEDICOS-->
+                <div class="tab-pane fade" id="medicos" role="tabpanel" aria-labelledby="medicos-tab">
+                    <div class="jumbotron">
+                        <h4 class="text-center">Lista de medicos</h4><br>
+                        <div>
+                            <button onclick="pdfMedicos()" class="btn btn-outline-secondary"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                                </svg> Generar PDf</button>
+
+                        </div>
+                        <br>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Especialidad</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in medicos %}
+                                <tr>
+                                    <th scope="row">{{ i.0 }}</th>
+                                    <td>{{ i.1 }}</td>
+                                    <td>{{ i.2 }}</td>
+                                    <td>{{ i.6 }}</td>
+                                    <td>
+                                        <button data-toggle="modal" data-target="#{{ i.5 }}" type="button"
+                                            class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                <path
+                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                            </svg>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{ i.5 }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Medico: {{ i.1 }}
+                                                            {{ i.2 }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Nombre</th>
+                                                                    <td>{{ i.1 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Apellido</th>
+                                                                    <td>{{ i.2 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Fecha de Nacimiento</th>
+                                                                    <td>{{ i.3 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Sexo</th>
+                                                                    <td>{{ i.4 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Nombre de Usuario</th>
+                                                                    <td>{{ i.5 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Especialidad</th>
+                                                                    <td>{{ i.6 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Contraseña</th>
+                                                                    <td>{{ i.7 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Número de Teléfono</th>
+                                                                    <td>{{ i.8 }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/edit/medic/{{ i.5 }}" type="button" class="btn btn-primary"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg></a>
+
+                                        <a href="/delete/medic/{{ i.5 }}" method="POST" type="button"
+                                            class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--TABLA DE MEDICAMENTOS-->
+                <div class="tab-pane fade" id="medicamentos" role="tabpanel" aria-labelledby="medicamentos-tab">
+                    <div class="jumbotron">
+                        <h4 class="text-center">Lista de medicamentos disponibles</h4><br>
+                        <div>
+                            <button onclick="pdfMedicamentos()" class="btn btn-outline-secondary"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
+                                    <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                                </svg> Generar PDf</button>
+
+                        </div>
+                        <br>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" WIDTH="50">No.</th>
+                                    <th scope="col" WIDTH="200">Nombre</th>
+                                    <th scope="col" WIDTH="100">Precio</th>
+                                    <th scope="col" WIDTH="250">Descripción</th>
+                                    <th scope="col" WIDTH="75">Unidades</th>
+                                    <th scope="col">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in medicina %}
+                                <tr>
+                                    <th scope="row">{{ i.0 }}</th>
+                                    <td>{{ i.1 }}</td>
+                                    <td>{{ i.2 }}</td>
+                                    <td>{{ i.3 }}</td>
+                                    <td>{{ i.4 }}</td>
+                                    <td>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#A{{ i.0 }}"
+                                            type="button" class="btn btn-success"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                <path
+                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                            </svg>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="A{{ i.0 }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel1">Medicamento: {{
+                                                            i.1 }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">Nombre</th>
+                                                                    <td>{{ i.1 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Precio </th>
+                                                                    <td>Q.{{ i.2 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Descripción:</th>
+                                                                    <td>{{ i.3 }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Cantidad</th>
+                                                                    <td>{{ i.4 }} disponibles</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/edit/medicine/{{ i.5 }}" type="button" class="btn btn-primary"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg></a>
+                                        <a href="/delete/medicine/{{ i.5 }}" method="POST" type="button"
+                                            class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function pdfPacientes() {
+        var doc = new jsPDF({
+            orientation: 'landscape'
+        });
+        var f = new Date();
+        let data = [];
+        var i = 1;
+        fetch('http://127.0.0.1:5000/admin/datos/pacientes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'A ocurrido un error!',
+                })
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    console.log(element.Nombre)
+                    data.push([i, element.Nombre, element.Apellido, element.Fecha, element.Sexo, element.Usuario, element.Contraseña, element.Teléfono]);
+                    i += 1
+                });
+                doc.setFontSize(20)
+                doc.text(15, 10, 'Pacientes registrados')
+                doc.text(140, 10, 'Fecha:')
+                doc.text(165, 10, f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear())
+
+                var columns = ["No.", "Nombre", "Apellido", "Fecha", "Sexo", "Usuario", "Contraseña", "Teléfono"];
+                doc.autoTable(columns, data, {
+                    margin: {
+                        top: 20
+                    }
+                });
+                doc.save('Reporte Pacientes.pdf');
+            })
+    }
+
+    function pdfEnfermeras() {
+        var doc = new jsPDF({
+            orientation: 'landscape'
+        });
+        var f = new Date();
+        var data = [];
+        var i = 1;
+        fetch('http://127.0.0.1:5000/admin/datos/enfermeras', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'A ocurrido un error!',
+                })
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    console.log(element.Nombre)
+                    data.push([i, element.Nombre, element.Apellido, element.Fecha, element.Sexo, element.Usuario, element.Contraseña, element.Teléfono]);
+                    i += 1
+                });
+                doc.setFontSize(20)
+                doc.text(15, 10, 'Reporte Enfermeras')
+                doc.text(140, 10, 'Fecha:')
+                doc.text(165, 10, f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear())
+
+                var columns = ["No.", "Nombre", "Apellido", "Fecha", "Sexo", "Usuario", "Contraseña", "Teléfono"];
+                doc.autoTable(columns, data, {
+                    margin: {
+                        top: 20
+                    }
+                });
+                doc.save('Reporte Enfermeras.pdf');
+            })
+    }
+    function pdfMedicos() {
+        var doc = new jsPDF({
+            orientation: 'landscape'
+        });
+        var f = new Date();
+        var data = [];
+        var i = 1;
+        fetch('http://127.0.0.1:5000/admin/datos/medicos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'A ocurrido un error!',
+                })
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    console.log(element.Nombre)
+                    data.push([i, element.Nombre, element.Apellido, element.Fecha, element.Sexo, element.Usuario, element.Especialidad, element.Contraseña, element.Teléfono]);
+                    i += 1
+                });
+                doc.setFontSize(20)
+                doc.text(15, 10, 'Reporte medicos')
+                doc.text(140, 10, 'Fecha:')
+                doc.text(165, 10, f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear())
+
+                var columns = ["No.", "Nombre", "Apellido", "Fecha", "Sexo", "Usuario", "Especialidad", "Contraseña", "Teléfono"];
+                doc.autoTable(columns, data, {
+                    margin: {
+                        top: 20
+                    }
+                });
+                doc.save('Reporte medicos.pdf');
+            })
+    }
+    function pdfMedicamentos() {
+        var doc = new jsPDF();
+        var f = new Date();
+        var data = [];
+        var i = 1;
+        fetch('http://127.0.0.1:5000/admin/datos/medicamentos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'A ocurrido un error!',
+                })
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    console.log(element.Nombre)
+                    data.push([i, element.Nombre, element.Precio, element.Cantidad, element.Descripción]);
+                    i += 1
+                });
+                doc.setFontSize(20)
+                doc.text(15, 10, 'Reporte medicamentos')
+                doc.text(140, 10, 'Fecha:')
+                doc.text(165, 10, f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear())
+
+                var columns = ["No.", "Nombre", "Precio", "Cantidad", "Descripción"];
+                doc.autoTable(columns, data, {
+                    margin: {
+                        top: 20
+                    }
+                });
+                doc.save('Reporte medicamentos.pdf');
+            })
+    }
+</script>
+
+{% endblock %}

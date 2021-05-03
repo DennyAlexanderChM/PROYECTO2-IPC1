@@ -1,0 +1,128 @@
+{% extends "Medicos/layout.html" %} {% block content %}
+<br>
+<div class="col-12 col-md-10 mx-auto">
+    <div class="jumbotron">
+        <h4 class="text-center">Lista de citas pendientes</h4><br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" WIDTH="40">No.</th>
+                    <th scope="col" WIDTH="160">Paciente</th>
+                    <th scope="col" WIDTH="150">Fecha</th>
+                    <th scope="col" WIDTH="100">Hora</th>
+                    <th scope="col" WIDTH="300">Motivo</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="datos">
+                {% for i in citas %}
+                <tr>
+                    <th scope="row">{{ i.0 }}</th>
+                    <td>{{ i.1 }} {{ i.2 }}</td>
+                    <td>{{ i.4 }}</td>
+                    <td>{{ i.5 }}</td>
+                    <td>{{ i.6 }}</td>
+                    <td> <button onclick="confirmarCita(this.id)" id="{{ i.3 }}"
+                            class="btn btn-primary">Confirmar</button>
+                        <button  onclick="rechazarCita(this.id)" id="{{ i.3 }}" class="btn btn-danger">Rechazar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="text-center">
+        <a href="/medico/citas/{{ usuario }}" type="button" class="btn btn-success  btn-lg">Regresar</a>
+    </div>
+</div>
+<hr class="my-5">
+<script>
+    function confirmarCita(id) {
+        var table = document.querySelector('#datos')
+        var contenido = ''
+        var j = 1
+        obj = {
+            "medico": `{{usuario}}`,
+            "usuario": id
+        }
+        fetch('http://127.0.0.1:5000/medico/cita/confirmar', {
+            method: 'POST',
+            body: JSON.stringify(obj),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                alert("Ocurrio un error, ver la consola")
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    contenido += `<tr>
+                            <td> ${j} </td>
+                            <td> ${element.Nombre} </td>
+                            <td> ${element.Fecha} </td>
+                            <td> ${element.Hora} </td>
+                            <td> ${element.Motivo} </td>
+                            <td> <button  onclick="confirmarCita(this.id)" id="${element.Usuario}" class="btn btn-primary">Confirmar</button>  <button  onclick="rechazarCita(this.id)" id="${element.Usuario}" class="btn btn-danger">Rechazar</button>
+                            </td>
+                            </tr>`
+                            j+=1
+                });
+                table.innerHTML = contenido
+                Swal.fire(
+                    'Listo',
+                    '¡Cita confirmada!',
+                    'success'
+                )
+            })
+    }
+
+    function rechazarCita(id) {
+        var table = document.querySelector('#datos')
+        var contenido = ''
+        var j = 1
+        obj = {
+            "usuario": id
+        }
+        fetch('http://127.0.0.1:5000/medico/cita/rechazar', {
+            method: 'POST',
+            body: JSON.stringify(obj),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                alert("Ocurrio un error, ver la consola")
+            })
+            .then(response => {
+                console.log(response);
+                response.forEach(element => {
+                    contenido += `<tr>
+                            <td> ${j} </td>
+                            <td> ${element.Nombre} </td>
+                            <td> ${element.Fecha} </td>
+                            <td> ${element.Hora} </td>
+                            <td> ${element.Motivo} </td>
+                            <td> <button  onclick="confirmarCita(this.id)" id="${element.Usuario}" class="btn btn-primary">Confirmar</button>  <button  onclick="rechazarCita(this.id)" id="${element.Usuario}" class="btn btn-danger">Rechazar</button>
+                            </td>
+                            </tr>`
+                            j+=1
+                });
+                table.innerHTML = contenido
+                Swal.fire(
+                    'Listo',
+                    '¡Cita denegada!',
+                    'success'
+                )
+            })
+    }
+</script>
+{% endblock %}
