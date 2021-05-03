@@ -21,7 +21,7 @@ login = False
 id_medicamento = 1
 
 # Buscar usuarios---Incio de sesion
-@app.route('/search', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def searchUser():
     error = False
     global datos_login
@@ -55,7 +55,7 @@ def searchUser():
                     return render_template('Medicos/home.html',nombre=i.getNombre(), apellido=i.getApellido(), usuario=i.getUser(), fecha_nacimiento=i.getDate(), sexo=i.getSexo(), especialidad = i.getEspecialidad(),tel=i.getPhone(), contra=i.getPassword())
         if not login:
             error = True
-            return render_template('/Home/login.html', error=True)
+            return render_template('Home/login.html', error=True)
 
 # añadir un nuevo usuario
 @ app.route('/perfil', methods=['POST'])
@@ -384,7 +384,7 @@ def login_():
         elif datos_login[0] == 'doctor':
             return redirect(url_for('home_doctor', id_user = datos_login[1]))
     else:
-        return render_template('home/login.html')
+        return render_template('Home/login.html')
 
 # cerrar sesión
 @app.route('/salir')
@@ -393,7 +393,7 @@ def logout():
     global login
     login = False
     datos_login = []
-    return render_template('/Home/login.html')
+    return render_template('Home/login.html')
 
 # Mas informacion
 @app.route('/about')
