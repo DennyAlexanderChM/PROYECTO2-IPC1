@@ -21,7 +21,7 @@ login = False
 id_medicamento = 1
 
 # Buscar usuarios---Incio de sesion
-@app.route('/login', methods=['POST'])
+@app.route('/search', methods=['POST'])
 def searchUser():
     error = False
     global datos_login
