@@ -1,5 +1,5 @@
 {% extends "Enfermeras/layout.html" %} {% block content %}
-<div class="container">
+<div class="container p-3">
     <div class="row">
         <div class="col-12 col-md-7 mx-auto">
             <div class="jumbotron">
@@ -8,53 +8,54 @@
                         <h3>Datos de facturación</h3><br>
                     </div>
                     <div class="text-center col-12">
-                        <form class="text-lg-right">
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Paciente</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="paciente" class="form-control" placeholder="Nombre completo"
-                                        required>
-                                </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Paciente</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="paciente" class="form-control" placeholder="Nombre completo"
+                                    required>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Medico</label>
-                                <div class="col-sm-8">
-                                    <select name="medico" class="custom-select" id="medico">
-                                        {% for i in medicos %}
-                                        <option value="{{ i.0 }} {{ i.1 }}">{{ i.0 }} {{ i.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Medico</label>
+                            <div class="col-sm-8">
+                                <select name="medico" class="custom-select" id="medico">
+                                    {% for i in medicos %}
+                                    <option value="{{ i.0 }} {{ i.1 }}">{{ i.0 }} {{ i.1 }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Costo Consulta</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="consulta" tabindex="1" class="form-control" value="0.0"
-                                        required>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Costo Consulta</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="consulta" tabindex="1" class="form-control" value="0.0" required>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Costo Operación</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="operacion" tabindex="1" class="form-control" value="0.0">
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Costo Operación</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="operacion" tabindex="1" class="form-control" value="0.0">
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Costo Internado</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="internado" tabindex="1" class="form-control" value="0.0">
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Costo Internado</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="internado" tabindex="1" class="form-control" value="0.0">
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Total</label>
-                                <div class="col-sm-8">
-                                    <input type="text" id="total" tabindex="1" class="form-control" value="0.0"
-                                        required>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Total</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="total" tabindex="1" class="form-control" value="0.0" required>
                             </div>
-                            <button onclick="generarRecibo()" class=" btn btn-primary btn-lg btn-block">Generar Recibo
-                            </button>
-                        </form>
+                        </div>
+                        <button onclick="generarRecibo()" class=" btn btn-primary btn-lg btn-block">Generar Recibo
+                        </button>
+                    </div>
+                    <div class="text-center p-3">
+                        <button onclick="generarRecibo()" class="btn btn-primary">Generar Recibo
+                        </button> <a href="/Enfermera/home/{{ usuario }}" type="button"
+                            class="btn btn-danger">Regresar<a>
                     </div>
                 </div>
             </div>
