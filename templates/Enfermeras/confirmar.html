@@ -6,10 +6,8 @@
                     <div class="text-center col-12">
                         <h3>Confirmar cita</h3><br>
                     </div>
-                         <form action="/enfermera/cita/confirmar/{{ usuario }}/{{ usuario2 }}"
-                    <div class="text-center col-12">
-                       
-                            method="POST">
+                        <form action="/enfermera/cita/confirmar/{{ usuario }}/{{ usuario2 }}"method="POST">
+                        <div class="text-center col-12">
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
@@ -38,14 +36,13 @@
 
                                     </tr>
                                 </tbody>
-                            </table>
-                            
-                    </div>
-                            <div class="text-center"><button type="submit" name='btn2'
+                            </table>    
+                        </div>
+                        <div class="text-center"><button type="submit" name='btn2'
                                     class=" btn btn-primary btn-lg">Confirmar</button> <a
                                     href="/enfermera/cita/pendientes/{{ usuario }}" type="button"
                                     class="btn btn-success  btn-lg">Cancelar</a></div>
-                        </form>
+                 </form>
             </div>
         </div>
     </div>
