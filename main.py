@@ -218,9 +218,9 @@ def editUsser(user_name):
                 else:
                     flash('¡Usuario existente!')
                     if datos_login[0] == 'admin':
-                        return redirect(url_for('page_user', user_name = new_user))
+                        return redirect(url_for('page_user', user_name = user_name))
                     else:
-                        return redirect(url_for('user_dates', id_user = new_user))
+                        return redirect(url_for('user_dates', id_user = user_name))
                     
 
 #Editar enfermera
@@ -261,9 +261,9 @@ def editNurse(user_name):
                 else:
                     flash('¡Usuario existente!')
                     if datos_login[0] == 'admin':
-                        return redirect(url_for('page_nurse', user_name = new_user))
+                        return redirect(url_for('page_nurse', user_name = user_name))
                     else:
-                        return redirect(url_for('nurse_dates', id_user = new_user))
+                        return redirect(url_for('nurse_dates', id_user = user_name))
                     
 
 #Editar un doctores
@@ -307,9 +307,9 @@ def editDoctor(user_name):
                 else:
                     flash('¡Usuario existente!')
                     if datos_login[0] == 'admin':
-                        return redirect(url_for('page_doctor', user_name = new_user))
+                        return redirect(url_for('page_doctor', user_name = user_name))
                     else:
-                        return redirect(url_for('medic_dates', id_user = new_user))
+                        return redirect(url_for('medic_dates', id_user = user_name))
 
 #Editar un medicamento
 @app.route('/edit/medicine/<string:m_Id>', methods=['POST'])
