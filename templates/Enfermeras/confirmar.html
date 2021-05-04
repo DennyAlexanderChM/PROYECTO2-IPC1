@@ -1,7 +1,5 @@
 {% extends "Enfermeras/layout.html" %} {% block content %}
-<br>
-<div class="container">
-    <div class="row">
+<div class="container p-3">
         <div class="col-12 col-md-12 mx-auto">
             <div class="jumbotron">
                 <div class="row text-center">
@@ -9,7 +7,7 @@
                         <h3>Confirmar cita</h3><br>
                     </div>
                     <div class="text-center col-12">
-                        <form class="text-lg-right" action="/enfermera/cita/confirmar/{{ usuario }}/{{ usuario2 }}"
+                        <form action="/enfermera/cita/confirmar/{{ usuario }}/{{ usuario2 }}"
                             method="POST">
                             <table class="table">
                                 <thead class="thead-dark">
@@ -46,7 +44,6 @@
                                     class="btn btn-success  btn-lg">Cancelar</a></div>
                         </form>
                     </div>
-                </div>
             </div>
         </div>
     </div>
