@@ -46,7 +46,7 @@
             "medico": `{{usuario}}`,
             "usuario": id
         }
-        fetch('http://127.0.0.1:5000/medico/cita/confirmar', {
+        fetch('hhttps://uhospitalluz.herokuapp.com/medico/cita/confirmar', {
             method: 'POST',
             body: JSON.stringify(obj),
             headers: {
@@ -89,7 +89,7 @@
         obj = {
             "usuario": id
         }
-        fetch('http://127.0.0.1:5000/medico/cita/rechazar', {
+        fetch('https://uhospitalluz.herokuapp.com/medico/cita/rechazar', {
             method: 'POST',
             body: JSON.stringify(obj),
             headers: {
