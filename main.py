@@ -978,5 +978,10 @@ def datos_medicamento():
     salida = {"Mensaje":"A ocurrido un error"}
     return(jsonify(salida))
 
+#Carga masiva---Ventanainicial
+@app.route('/admin/add')
+def cargas_masivas():
+    return render_template('Admin/admin.html')
+
 if __name__ == '__main__':
     app.run(debug=True)  # modo de prueba
