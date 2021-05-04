@@ -7,8 +7,7 @@
                     <div class="text-center col-12">
                         <h3>Recetas</h3><br>
                     </div>
-                    <div class="text-center col-12">
-                        <form class="text-lg-right">
+                    <div class="text-center col-12"><div class="text-lg-right">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Paciente</label>
                                 <div class="col-sm-8">
@@ -32,11 +31,11 @@
                                 <div class="col-sm-8">
                                     <textarea class="form-control" id="descripcion" rows="4" required> </textarea>
                                 </div>
-                            </div><br>
-                            <div class="text-center">
+                            </div>
+                        </div>
+                        <div class="text-center p-3" >
                             <button onclick="generarReceta()" class="btn btn-primary">Generar Recibo
                             </button> <a href="/medico/home/{{ usuario }}" type="button" class="btn btn-danger">Regresar<a></div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -84,6 +83,23 @@
         doc.text(120, 240, 'F._______________________')
         doc.text(120, 250, paciente)
         doc.save('factura.pdf');
+
+        const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: `¡Receta creada!`
+            })
     }
 </script>
 {% endblock %}

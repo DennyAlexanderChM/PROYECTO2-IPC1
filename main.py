@@ -25,9 +25,7 @@ id_medicamento = 1
 def searchUser():
     error = False
     global datos_login
-    global usuarios, enfermeras, doctores
-    global login
-    print(login)
+    global usuarios, enfermeras, doctores, login
     if request.method == 'POST':
         if request.form['user'] == 'admin' and request.form['pass'] == '1234':
             datos_login = ['admin',True]
@@ -384,7 +382,7 @@ def login_():
         elif datos_login[0] == 'doctor':
             return redirect(url_for('home_doctor', id_user = datos_login[1]))
     else:
-        return render_template('Home/login.html')
+        return render_template('/Home/login.html')
 
 # cerrar sesión
 @app.route('/salir')
@@ -393,7 +391,7 @@ def logout():
     global login
     login = False
     datos_login = []
-    return render_template('Home/login.html')
+    return render_template('/Home/login.html')
 
 # Mas informacion
 @app.route('/about')
@@ -500,8 +498,6 @@ def confirmar_citad():
     datos = []
     temp_medic = request.json['medico']
     temp_user = request.json['usuario']
-
-
     if citas:
         for i in range(len(citas)):
             if temp_user == citas[i].getPaciente():
@@ -644,7 +640,6 @@ def citas_pendites(id_user):
                         tmp = (j,k.getNombre(),k.getApellido(),i.getPaciente(),i.getFecha(),i.getHora(),i.getMotivo(),i.getEstado())
                         citas_.append(tmp)
                         j += 1
-    
     if enfermeras:
         for i in enfermeras:
             if i.getUser() == id_user:
@@ -688,7 +683,6 @@ def confirmar_cita(id_nurse,id_user):
                         if k.getUser() == i.getPaciente():
                             temp_=(k.getNombre(),k.getApellido(),i.getPaciente(), i.getFecha(),i.getHora(),i.getMotivo())
                             temp.append(temp_)
-
     if doctores:
         for i in doctores:
             temp_ = (i.getNombre(),i.getApellido(),i.getUser())
@@ -698,7 +692,6 @@ def confirmar_cita(id_nurse,id_user):
         for i in enfermeras:
             if i.getUser() == id_nurse:
                 return render_template('Enfermeras/confirmar.html',medicos=medicos_temp, usuario2=id_user, cita = temp,nombre=i.getNombre(), apellido=i.getApellido(), usuario=i.getUser(), fecha_nacimiento=i.getDate(), sexo=i.getSexo(), tel=i.getPhone(), contra=i.getPassword())
-
 
 #Confirmar cita
 @app.route('/enfermera/cita/confirmar/<string:id_nurse>/<string:id_user>',methods=['POST'])
@@ -852,36 +845,7 @@ def tienda_user(id_user):
             if i.getUser() == id_user:
                 return render_template('user/tienda.html',medicamentos = medicamentos_disponibles,nombre=i.getNombre(), apellido=i.getApellido(), usuario=i.getUser(), fecha_nacimiento=i.getDate(), sexo=i.getSexo(), tel=i.getPhone(), contra=i.getPassword())
 
-'''
-#cita completada
-@app.route('/usuario/carrito/agregar', methods=['POST'])
-def agregar_producto():
-    global carrito
-    global usuarios
-    global medicamentos
-    producto = request.json['Producto']
-    usuario = request.json['Usuario']
-    cantidad = int(request.json['Cantidad'])
-    Datos = []
-    if medicamentos:
-        for i in medicamentos:
-            if i.getId() = producto:
-                j = int(i.getCantidad())-cantidad
-                i.setCantidad(j)
-                temp = {
-                    'Nombre': i.getId(),
-                    'Apellido':i.getCantidad(),
-                    'Usuario': i.getPaciente(),
-                    'Fecha': i.getFecha(),
-                    'Hora': i.getHora(),
-                    'Motivo':i.getMotivo(),
-                    }
-                datos.append(temp)
-        return(jsonify(datos))
-                            
-    salida = {"Mensaje":"A ocurrido un error"}
-    return(jsonify(salida))
-'''
+
 '''
 ------------------------------------SECCIÓN DEL ADMIN--------------------------------------
 '''
@@ -923,7 +887,7 @@ def tablas():
 
     return render_template('Admin/tables.html', users=users, enfermeras=enfermeras_, medicos=doctores_, medicina=medicamentos_)
 
-#Obtener datos Paceientes
+#Obtener datos Pacientes
 @app.route('/admin/datos/pacientes')
 def datos_pacientes():
     global usuarios
@@ -1013,11 +977,6 @@ def datos_medicamento():
 
     salida = {"Mensaje":"A ocurrido un error"}
     return(jsonify(salida))
-
-#Carga masiva---Ventanainicial
-@app.route('/admin/add')
-def cargas_masivas():
-    return render_template('Admin/admin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)  # modo de prueba

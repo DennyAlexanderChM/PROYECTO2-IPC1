@@ -24,7 +24,7 @@
                     <td>{{ i.6 }}</td>
                     <td> <button onclick="confirmarCita(this.id)" id="{{ i.3 }}"
                             class="btn btn-primary">Confirmar</button>
-                        <button  onclick="rechazarCita(this.id)" id="{{ i.3 }}" class="btn btn-danger">Rechazar</button>
+                        <button onclick="rechazarCita(this.id)" id="{{ i.3 }}" class="btn btn-danger">Rechazar</button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -71,7 +71,7 @@
                             <td> <button  onclick="confirmarCita(this.id)" id="${element.Usuario}" class="btn btn-primary">Confirmar</button>  <button  onclick="rechazarCita(this.id)" id="${element.Usuario}" class="btn btn-danger">Rechazar</button>
                             </td>
                             </tr>`
-                            j+=1
+                    j += 1
                 });
                 table.innerHTML = contenido
                 Swal.fire(
@@ -114,7 +114,7 @@
                             <td> <button  onclick="confirmarCita(this.id)" id="${element.Usuario}" class="btn btn-primary">Confirmar</button>  <button  onclick="rechazarCita(this.id)" id="${element.Usuario}" class="btn btn-danger">Rechazar</button>
                             </td>
                             </tr>`
-                            j+=1
+                    j += 1
                 });
                 table.innerHTML = contenido
                 Swal.fire(
