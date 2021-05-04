@@ -106,7 +106,7 @@
             for (var j = 0; j < headers.length; j++) {
                 obj[headers[j]] = currentline[j];
             }
-            fetch('http://127.0.0.1:5000/usuario', {
+            fetch('https://uhospitalluz.herokuapp.com/usuario', {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -162,7 +162,7 @@
             for (var j = 0; j < headers.length; j++) {
                 obj[headers[j]] = currentline[j];
             }
-            fetch('http://127.0.0.1:5000/enfermeras', {
+            fetch('https://uhospitalluz.herokuapp.com/enfermeras', {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -218,7 +218,7 @@
             for (var j = 0; j < headers.length; j++) {
                 obj[headers[j]] = currentline[j];
             }
-            fetch('http://127.0.0.1:5000/medicos', {
+            fetch('https://uhospitalluz.herokuapp.com/medicos', {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -273,7 +273,7 @@
             for (var j = 0; j < headers.length; j++) {
                 obj[headers[j]] = currentline[j];
             }
-            fetch('http://127.0.0.1:5000/medicamentos', {
+            fetch('https://uhospitalluz.herokuapp.com/medicamentos', {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
